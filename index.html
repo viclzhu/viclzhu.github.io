@@ -1,0 +1,180 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="manifest" href="stuff/site.webmanifest">
+  <link rel="apple-touch-icon" href="stuff/icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="stuff/css/normalize.css">
+  <link rel="stylesheet" href="stuff/css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body id="main" style="width:100vw; background-color: lightskyblue">
+
+  <!-- Heading -->
+
+  <div class="gradient-border happy-bday">
+    <h style="color: cornflowerblue; font-size: 50px; font-family: Helvetica">
+      生日快乐 <span class="rainbow-text-animated">Shangyin!!!</span>
+    </h>
+  </div>
+
+  <!-- End Heading -->
+
+  <div style="height: 50px"></div>
+
+  <!-- Card -->
+
+  <style>
+    .grid-container {
+      display: grid;
+      grid-column-gap: 10px;
+      padding: 10px;
+      position: relative;
+    }
+    .grid-item {
+      padding: 20px;
+    }
+    .grid-item1 {
+      grid-column-start: 1;
+      grid-column-end: 2;
+    }
+    .grid-item2 {
+      grid-column-start: 2;
+      grid-column-end: 3;
+    }
+    .grid-item3 {
+      grid-column-start: 3;
+      grid-column-end: 4;
+    }
+  </style>
+  <div id="WOOOO" class="card center-div rainbow-text" style="width: 80%; background-color: white">
+    <div id="main-body" class="grid-container">
+      <img id="img-left" class="grid-item grid-item1 round-picture isaac-face" src="stuff/img/isaac_closeup.jpg">
+      <div class="grid-item grid-item2" style="height: 500px; text-align:center; margin: auto auto; font-family: 'Times New Roman'; font-size: 20px;">
+        <p>Happy Birthday Shangyin!</p>
+        <p>In case you haven't noticed, today is September 16th, your birthday!</p>
+        <p>I made this website to celebrate this day!</p>
+        <p>Enjoy!!!</p>
+        <p>你妈，</p>
+        <p>Victor</p>
+      </div>
+      <img id="img-right" class="grid-item grid-item3 isaac-face" src="stuff/img/isaac_closeup.jpg">
+    </div>
+
+  </div>
+
+  <!-- End Card -->
+
+
+  <style>
+    #hover-to-play {
+      background-color: lightblue;
+      display: none;
+    }
+    #hover-to-play:hover {
+      cursor: crosshair;
+    }
+  </style>
+
+  <div id="stadium">
+    <div id="dance-holder" style="width: 80vw; margin: auto">
+      <div id="lineup" style="display: none; width: 100%; margin: auto; margin-top: -20px; transform: rotateY(180deg); height: auto">
+        <img class="round-picture isaac-lineup" style="margin-top:125px" src="stuff/img/isaac_closeup.jpg">
+        <img class="round-picture isaac-lineup" src="stuff/img/isaac_closeup.jpg">
+        <img class="round-picture isaac-lineup"  src="stuff/img/isaac_closeup.jpg">
+        <img class="round-picture isaac-lineup" src="stuff/img/isaac_closeup.jpg">
+        <img class="round-picture isaac-lineup" style="margin-top:125px" src="stuff/img/isaac_closeup.jpg">
+      </div>
+    </div>
+
+    <div id="hover-to-play" style="text-align: center; display: block;
+        width: 75%;
+        margin: 50px auto 0px auto;
+        left: 0;
+        right: 0;
+        padding: 1em;">
+      Hover to PLAY
+    </div>
+
+    <div id="footer" style="text-align: center; margin-top: 10px; color: lightgrey">Shangyin's 21st Birthday on September 16, 2020</div>
+  </div>
+
+  <script>
+      const audio = new Audio('stuff/yes.m4a');
+      const body = document.querySelector('#main');
+      const main = document.querySelector('#WOOOO');
+      const main_body = document.querySelector('#main-body');
+      const lineup = document.querySelector('#lineup');
+      const stadium = document.getElementById("stadium");
+
+      // const dancers = document.getElementsByClassName("isaac-lineup");
+
+      window.onload = () => {
+          const hoverToPlay = document.querySelector('#hover-to-play');
+
+          hoverToPlay.onmouseover = () => {
+              audio.play();
+              main_body.style.display = "none";
+              lineup.style.display = "flex";
+
+              // 20 secs after music starts, dancing should commence.
+              // 18 secs before pre-dance start.
+              // 2 secs pre-dance duration.
+              lineup.classList.add("pre-dance");
+
+              hoverToPlay.style.padding = "";
+              hoverToPlay.style.paddingTop = "60vh";
+              hoverToPlay.style.paddingBottom = "1em";
+              stadium.style.height = "60vh";
+              hoverToPlay.style.width = "100%";
+              hoverToPlay.textContent = "新宝島";
+          }
+
+          // Setup for dancing
+          lineup.addEventListener("animationstart", listener, false);
+          lineup.addEventListener("animationend", listener, false);
+
+          function listener(event) {
+            switch(event.type) {
+              // Remove the rotateY transform property
+              // So that upon animationend
+              // no weird flip back
+              case "animationstart":
+                lineup.style.transform = "";
+                lineup.style.filter = "";
+
+                // 1.5s after pre-dance begins,
+                // first step is about to be taken
+                // Add effects as step happens
+                setTimeout(function() {
+                  // Add rainbow and background effects
+                  hoverToPlay.classList.add("rainbow-text-animated-quick");
+                  body.classList.add("quadrat");
+                  main.classList.add("rainbow-text-animated-quick")
+                }, 1500);
+                break;
+              // When pre-dance ends, start the dance!
+              case "animationend":
+                lineup.classList.remove("pre-dance");
+                lineup.classList.add("dance");
+
+                break;
+            }
+          }
+      }
+  </script>
+  <script src="stuff/js/vendor/modernizr-3.7.1.min.js"></script>
+  <script src="stuff/js/plugins.js"></script>
+  <script src="stuff/js/main.js"></script>
+</body>
+
+</html>
