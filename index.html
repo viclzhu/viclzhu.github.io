@@ -23,7 +23,7 @@
 
   <div class="gradient-border happy-bday">
     <h style="color: cornflowerblue; font-size: 50px; font-family: Helvetica">
-      Happy Birthday <span class="rainbow-text-animated">David!!!</span>
+      Happy Birthday <span class="rainbow-text-animated">Tzen-Hao!!!</span>
     </h>
   </div>
 
@@ -58,20 +58,19 @@
   </style>
   <div id="WOOOO" class="card center-div rainbow-text" style="width: 80%; background-color: white">
     <div id="main-body" class="grid-container">
-      <img id="img-left" class="grid-item grid-item1 round-picture david-face" src="stuff/img/david_closeup.jpg">
+      <img id="img-left" class="grid-item grid-item1 round-picture face" src="stuff/img/tzen-hao_suit.jpg">
       <div class="grid-item grid-item2" style="height: 500px; text-align:center; margin: auto auto; font-family: 'Times New Roman'; font-size: 20px;">
-        <p>Happy Birthday David!</p>
-        <p>Today is September 20th, your birthday!</p>
-        <p>KANPAI!!!</p>
-        <p>From,</p>
+        <p>Happy Birthday Tzen-Hao!</p>
+        <p>Enjoy being 1 year older!</p>
         <p>Victor</p>
       </div>
-      <img id="img-right" class="grid-item grid-item3 david-face" src="stuff/img/david_closeup.jpg">
+      <img id="img-right" class="grid-item grid-item3 face" src="stuff/img/tzen-hao_suit.jpg">
     </div>
 
   </div>
 
   <!-- End Card -->
+
 
   <style>
     #hover-to-play {
@@ -86,13 +85,17 @@
   <div id="stadium">
     <div id="dance-holder" style="width: 80vw; margin: auto">
       <div id="lineup" style="display: none; width: 100%; margin: auto; margin-top: -20px; transform: rotateY(180deg); height: auto">
-        <img class="round-picture david-lineup" style="margin-top:125px" src="stuff/img/david_closeup.jpg">
-        <img class="round-picture david-lineup" src="stuff/img/david_closeup.jpg">
-        <img class="round-picture david-lineup" src="stuff/img/david_closeup.jpg">
-        <img class="round-picture david-lineup" src="stuff/img/david_closeup.jpg">
-        <img class="round-picture david-lineup" style="margin-top:125px" src="stuff/img/david_closeup.jpg">
+        <img class="round-picture lineup" style="margin-top:125px" src="stuff/img/tzen-hao_suit.jpg">
+        <img class="round-picture lineup" src="stuff/img/tzen-hao_suit.jpg">
+        <img class="round-picture lineup"  src="stuff/img/tzen-hao_suit.jpg">
+        <img class="round-picture lineup" src="stuff/img/tzen-hao_suit.jpg">
+        <img class="round-picture lineup" style="margin-top:125px" src="stuff/img/tzen-hao_suit.jpg">
+      </div>
+      <div id="big-boi" style="display: none; width: 100%;">
+        <img class="big-one round-picture rotate" src="stuff/img/tzen-hao_suit.jpg">
       </div>
     </div>
+    
 
     <div id="hover-to-play" style="text-align: center; display: block;
         width: 75%;
@@ -103,7 +106,7 @@
       Hover to PLAY
     </div>
 
-    <div id="footer" style="text-align: center; margin-top: 10px; color: lightgrey">David's 20th Birthday on September 20, 2020</div>
+    <div id="footer" style="text-align: center; margin-top: 10px; color: lightgrey">Tzen-Hao's 20th Birthday on November 23rd, 2020</div>
   </div>
 
   <script>
@@ -113,12 +116,16 @@
       const main_body = document.querySelector('#main-body');
       const lineup = document.querySelector('#lineup');
       const stadium = document.getElementById("stadium");
+      const big_one = document.getElementById("big-boi");
+      var timerStarted = false;
 
+      // const dancers = document.getElementsByClassName("lineup");
 
       window.onload = () => {
           const hoverToPlay = document.querySelector('#hover-to-play');
 
           hoverToPlay.onmouseover = () => {
+              audio.volume = 0.075;
               audio.play();
               main_body.style.display = "none";
               lineup.style.display = "flex";
@@ -133,7 +140,31 @@
               hoverToPlay.style.paddingBottom = "1em";
               stadium.style.height = "60vh";
               hoverToPlay.style.width = "100%";
-              hoverToPlay.textContent = "新宝島";
+              // hoverToPlay.textContent = "20 seconds to dance start";
+              startTimer(18);
+          }
+
+          function startTimer(seconds) {
+              if (timerStarted) {
+                return;
+              }
+              timerStarted = true;
+              var intervalID = setInterval(function () {
+                  if (seconds == 0) {
+                      hoverToPlay.textContent = "WOOOOOOOOOOOOOOOOOOOOOOO";
+                      clearInterval(intervalID);              }
+                  else if (seconds == 1) {
+                      hoverToPlay.textContent = seconds + " second to dance start";
+                  }
+                  else {
+                     hoverToPlay.textContent = seconds + " seconds to dance start";
+                  }
+
+                  if (seconds > 0) {
+                     seconds--;
+                  }
+              }, 1000);
+
           }
 
           // Setup for dancing
@@ -153,6 +184,12 @@
                 // first step is about to be taken
                 // Add effects as step happens
                 setTimeout(function() {
+                  // Reveal big boi
+                  big_one.style.display = "block";
+                  // Remove excess margin and padding from hoverToPlay
+                  hoverToPlay.style.paddingTop = "10vh";
+                  hoverToPlay.style.paddingBottom = 0;
+                  hoverToPlay.style.margin = "auto";
                   // Add rainbow and background effects
                   hoverToPlay.classList.add("rainbow-text-animated-quick");
                   body.classList.add("quadrat");
@@ -163,7 +200,6 @@
               case "animationend":
                 lineup.classList.remove("pre-dance");
                 lineup.classList.add("dance");
-
                 break;
             }
           }

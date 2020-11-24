@@ -424,13 +424,20 @@ img:hover {
   transform: scale(1.5);
 }
 
-.david-face {
+.face {
   width:65%;
   height:auto;
   margin: auto auto;
 }
 
-.david-lineup {
+.big-one {
+  display: block;
+  width: 500px;
+  height: 500px;
+  margin: auto;
+}
+
+.lineup {
   width: 15%;
   height: auto;
   margin: auto auto;
@@ -483,4 +490,9 @@ img:hover {
   100% {
     left: -30px;
   }
+}
+
+* {
+  /* Debugging div shapes */
+  /* border: 1px solid red; */
 }
